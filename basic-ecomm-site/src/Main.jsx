@@ -5,22 +5,70 @@ export default class Main extends Component {
     pageTitle: "Customers",
     customersCount: 5,
     customers: [
-      { id: 1, name: "Scott", phone: "123-456", address: { city: "Ottawa" } },
-      { id: 2, name: "Dana", phone: "654-321", address: { city: "Ottawa" } },
-      { id: 3, name: "Parker", phone: null, address: { city: "Ottawa" } },
-      { id: 4, name: "Jason", phone: "976-452", address: { city: "Ottawa" } },
-      { id: 5, name: "Mandy", phone: "512-348", address: { city: "Ottawa" } },
-      { id: 6, name: "Clark", phone: null, address: { city: "Ottawa" } },
-      { id: 7, name: "Barry", phone: "451-786", address: { city: "Ottawa" } },
+      {
+        id: 1,
+        name: "Scott",
+        phone: "123-456",
+        address: { city: "Ottawa" },
+        photo: "https://picsum.photos/id/1010/60",
+      },
+      {
+        id: 2,
+        name: "Dana",
+        phone: "654-321",
+        address: { city: "Ottawa" },
+        photo: "https://picsum.photos/id/1011/60",
+      },
+      {
+        id: 3,
+        name: "Parker",
+        phone: null,
+        address: { city: "Ottawa" },
+        photo: "https://picsum.photos/id/1012/60",
+      },
+      {
+        id: 4,
+        name: "Jason",
+        phone: "976-452",
+        address: { city: "Ottawa" },
+        photo: "https://picsum.photos/id/1013/60",
+      },
+      {
+        id: 5,
+        name: "Mandy",
+        phone: "512-348",
+        address: { city: "Ottawa" },
+        photo: "https://picsum.photos/id/1014/60",
+      },
+      {
+        id: 6,
+        name: "Clark",
+        phone: null,
+        address: { city: "Ottawa" },
+        photo: "https://picsum.photos/id/1015/60",
+      },
+      {
+        id: 7,
+        name: "Barry",
+        phone: "451-786",
+        address: { city: "Ottawa" },
+        photo: "https://picsum.photos/id/1016/60",
+      },
     ],
+  };
+
+  customerNameStyle = (custName) => {
+    if (custName.startsWith("S")) return "green-highlight border-left";
+    else if (custName.startsWith("J")) return "red-highlight border-right";
+    else return "";
   };
 
   render() {
     return (
       <div>
-        <h4 className="border-bottom m-1 p-1">
+        <h4 className="m-1 p-1">
           {this.state.pageTitle}
-          <span class="badge badge-secondary m-2">
+          <span className="badge badge-secondary m-2">
             {this.state.customersCount}
           </span>
           <button className="btn btn-info" onClick={this.onRefreshClick}>
@@ -33,29 +81,13 @@ export default class Main extends Component {
           <thead>
             <tr>
               <th>#</th>
+              <th>Customer Photo</th>
               <th>Customer Name</th>
               <th>Phone Number</th>
               <th>City</th>
             </tr>
           </thead>
-          <tbody>
-            {this.state.customers.map((cust) => {
-              return (
-                <tr key={cust.id}>
-                  <td>{cust.id}</td>
-                  <td>{cust.name}</td>
-                  <td>
-                    {cust.phone ? (
-                      cust.phone
-                    ) : (
-                      <div className="bg-warning p-2 text-center">No phone</div>
-                    )}
-                  </td>
-                  <td>{cust.address.city}</td>
-                </tr>
-              );
-            })}
-          </tbody>
+          <tbody>{this.getCustomerRow()}</tbody>
         </table>
       </div>
     );
@@ -63,5 +95,28 @@ export default class Main extends Component {
   // Exectures when the user clicks on Refresh button
   onRefreshClick = () => {
     this.setState({ customersCount: 7 });
+  };
+
+  getPhoneToRender = (phone) => {
+    if (phone) return phone;
+    else {
+      return <div className="bg-warning p-2 text-center">No phone</div>;
+    }
+  };
+
+  getCustomerRow = () => {
+    return this.state.customers.map((cust) => {
+      return (
+        <tr key={cust.id}>
+          <td>{cust.id}</td>
+          <td>
+            <img src={cust.photo} alt="Customer" />
+          </td>
+          <td className={this.customerNameStyle(cust.name)}>{cust.name}</td>
+          <td>{this.getPhoneToRender(cust.phone)}</td>
+          <td>{cust.address.city}</td>
+        </tr>
+      );
+    });
   };
 }

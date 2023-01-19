@@ -6,6 +6,16 @@
   background-color: #0e5526 !important;
 }
 
-/* .navbar-toggler {
-  transition: transform 1s ease-in-out;
-} */
+.badge {
+  background-color: #808080 !important;
+}
+
+.green-highlight {
+  color: green;
+  font-size: 2.5rem;
+}
+
+.red-highlight {
+  color: red;
+  font-size: 1.5rem;
+}
