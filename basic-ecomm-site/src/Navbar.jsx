@@ -19,7 +19,7 @@ class NavBar extends Component {
       <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-style">
           <a className="navbar-brand" href="/#">
-            My Brand
+            eCommerce Site Training
           </a>
           <button
             ref={this.buttonRef}
